@@ -91,7 +91,7 @@ export default function CommandPalette({
             autoCapitalize="off"
             spellCheck={false}
             aria-label="Search commands"
-            className="min-w-0 flex-1 bg-transparent text-sm text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-dim)]"
+            className="focus-ring-none min-w-0 flex-1 bg-transparent text-sm text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-dim)]"
           />
           <button
             type="button"

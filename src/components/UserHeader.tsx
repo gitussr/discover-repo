@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { GitHubUser } from "@/lib/types";
 
-export default function UserHeader({ user }: { user: GitHubUser }) {
+export default function UserHeader({ user, onExit }: { user: GitHubUser; onExit: () => void }) {
   return (
     <header className="flex items-start gap-3">
       <Image
@@ -21,14 +21,19 @@ export default function UserHeader({ user }: { user: GitHubUser }) {
         <p className="mt-1 text-sm text-[var(--color-text-muted)]">
           A searchable archive of public repositories.
         </p>
-        <a
-          href={user.htmlUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-1 inline-block text-xs text-[var(--color-accent)] hover:underline"
-        >
-          GitHub profile ↗
-        </a>
+        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+          <a
+            href={user.htmlUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[var(--color-accent)] hover:underline"
+          >
+            GitHub profile ↗
+          </a>
+          <button type="button" onClick={onExit} className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:underline">
+            ✕ exit {user.login}
+          </button>
+        </div>
       </div>
     </header>
   );

@@ -89,6 +89,17 @@ export default function CommandCenter({
     setFilters((f) => ({ ...f, ...patch }));
   }, []);
 
+  // Filters only render inside the "index" view — clicking a filter control
+  // while another view (help, archaeology, techmap, ...) is showing must
+  // switch back to it, or the change silently has no visible effect.
+  const applyFilterChange = useCallback(
+    (patch: Partial<FilterState>) => {
+      patchFilters(patch);
+      setViewMode("index");
+    },
+    [patchFilters]
+  );
+
   const handleOpen = useCallback(
     (repo: Repository) => {
       setOpenRepoName(repo.name);
@@ -158,7 +169,7 @@ export default function CommandCenter({
   function handleInputChange(value: string) {
     setInputValue(value);
     if (!value.startsWith("/")) {
-      patchFilters({ q: value });
+      applyFilterChange({ q: value });
     }
   }
 
@@ -215,7 +226,7 @@ export default function CommandCenter({
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-4 py-6 sm:py-8">
-      <UserHeader user={user} />
+      <UserHeader user={user} onExit={() => navigate("/")} />
 
       <div className="mt-6">
         <StatsBar repos={repos} publicRepos={user.publicRepos} />
@@ -242,11 +253,14 @@ export default function CommandCenter({
       </div>
 
       <div className="mt-3">
-        <QuickFilters filters={filters} onChange={patchFilters} />
+        <QuickFilters filters={filters} onChange={applyFilterChange} />
       </div>
 
       <div className="mt-3">
-        <FilterChips filters={filters} onRemove={(key) => patchFilters({ [key]: undefined } as Partial<FilterState>)} />
+        <FilterChips
+          filters={filters}
+          onRemove={(key) => applyFilterChange({ [key]: undefined } as Partial<FilterState>)}
+        />
       </div>
 
       {outputMessage && (

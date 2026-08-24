@@ -76,7 +76,7 @@ const CommandBar = forwardRef<HTMLInputElement, CommandBarProps>(function Comman
 
   return (
     <div className="relative">
-      <div className="flex items-center gap-2 rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 focus-within:border-[var(--color-accent)]">
+      <div className="flex items-center gap-2 rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 focus-within:border-[var(--color-accent)] focus-within:shadow-[0_0_0_2px_var(--color-accent)]">
         <span aria-hidden="true" className="text-[var(--color-text-dim)]">
           $
         </span>
@@ -99,7 +99,7 @@ const CommandBar = forwardRef<HTMLInputElement, CommandBarProps>(function Comman
           aria-controls="command-suggestions"
           aria-autocomplete="list"
           aria-label={`Search or command repositories for ${username}`}
-          className="min-w-0 flex-1 bg-transparent text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-dim)]"
+          className="focus-ring-none min-w-0 flex-1 bg-transparent text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-dim)]"
         />
         <kbd className="hidden shrink-0 rounded-sm border border-[var(--color-border)] px-1.5 py-0.5 text-[10px] text-[var(--color-text-dim)] sm:inline-block">
           Ctrl K
