@@ -1,7 +1,11 @@
-import Link from "next/link";
+"use client";
+
+import { useRoute } from "@/lib/spa-router";
 import UsernameForm from "@/components/UsernameForm";
 
 export default function Home() {
+  const { navigate } = useRoute();
+
   return (
     <div className="flex flex-1 items-center justify-center px-4 py-16">
       <main className="w-full max-w-sm">
@@ -18,13 +22,21 @@ export default function Home() {
         </div>
         <p className="mt-8 text-xs text-[var(--color-text-dim)]">
           Try:{" "}
-          <Link href="/gitussr" className="text-[var(--color-accent)] hover:underline">
+          <button
+            type="button"
+            onClick={() => navigate("/gitussr")}
+            className="text-[var(--color-accent)] hover:underline"
+          >
             /gitussr
-          </Link>{" "}
+          </button>{" "}
           ·{" "}
-          <Link href="/octocat" className="text-[var(--color-accent)] hover:underline">
+          <button
+            type="button"
+            onClick={() => navigate("/octocat")}
+            className="text-[var(--color-accent)] hover:underline"
+          >
             /octocat
-          </Link>
+          </button>
         </p>
       </main>
     </div>

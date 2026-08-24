@@ -7,23 +7,15 @@ export function isValidGitHubUsername(username: string): boolean {
   return USERNAME_PATTERN.test(username);
 }
 
-function headers(): HeadersInit {
-  const h: HeadersInit = { Accept: "application/vnd.github+json" };
-  // Optional: raise the anonymous rate limit by supplying a server-side token.
-  // Never exposed to the client — only read from the server environment.
-  if (process.env.GITHUB_TOKEN) {
-    h.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-  }
-  return h;
-}
+// This runs entirely client-side (see src/lib/spa-router.tsx for why), so
+// requests are always unauthenticated — GitHub's anonymous rate limit
+// (60 req/hr per IP) applies. There is no server to hold a token safely.
+const HEADERS: HeadersInit = { Accept: "application/vnd.github+json" };
 
 async function githubFetch(path: string): Promise<Response> {
   let res: Response;
   try {
-    res = await fetch(`${GITHUB_API}${path}`, {
-      headers: headers(),
-      next: { revalidate: 300 },
-    });
+    res = await fetch(`${GITHUB_API}${path}`, { headers: HEADERS });
   } catch {
     throw new GitHubApiError("api-error", "GitHub API unavailable.");
   }
@@ -114,10 +106,7 @@ export async function getReadmeText(owner: string, repo: string): Promise<string
   try {
     res = await fetch(
       `${GITHUB_API}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/readme`,
-      {
-        headers: { ...headers(), Accept: "application/vnd.github.raw+json" },
-        next: { revalidate: 3600 },
-      }
+      { headers: { Accept: "application/vnd.github.raw+json" } }
     );
   } catch {
     return null;

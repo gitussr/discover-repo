@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRoute } from "@/lib/spa-router";
 import type { GitHubUser, Repository } from "@/lib/types";
 import { applyFilters, EMPTY_FILTERS, type FilterState } from "@/lib/filter";
 import { parseCommandInput, type ViewMode } from "@/lib/commands";
@@ -66,7 +66,7 @@ export default function CommandCenter({
   initialOpenRepoName?: string;
   repoNotFound?: boolean;
 }) {
-  const router = useRouter();
+  const { navigate } = useRoute();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [filters, setFilters] = useState<FilterState>(initialFilters);
@@ -81,7 +81,7 @@ export default function CommandCenter({
   const basePath = openRepoName ? `/${username}/repo/${encodeURIComponent(openRepoName)}` : `/${username}`;
 
   useEffect(() => {
-    router.replace(`${basePath}${buildQueryString(filters)}`, { scroll: false });
+    navigate(`${basePath}${buildQueryString(filters)}`, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, basePath]);
 
@@ -117,7 +117,7 @@ export default function CommandCenter({
 
     if (outcome.switchUser) {
       if (isValidGitHubUsername(outcome.switchUser)) {
-        router.push(`/${outcome.switchUser}`);
+        navigate(`/${outcome.switchUser}`);
       } else {
         setOutputMessage("✗ Invalid GitHub username.");
       }

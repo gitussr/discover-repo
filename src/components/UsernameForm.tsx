@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { isValidGitHubUsername } from "@/lib/github";
+import { useRoute } from "@/lib/spa-router";
 
 export default function UsernameForm() {
-  const router = useRouter();
+  const { navigate } = useRoute();
   const [value, setValue] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +20,7 @@ export default function UsernameForm() {
       setError("Invalid GitHub username.");
       return;
     }
-    router.push(`/${trimmed}`);
+    navigate(`/${trimmed}`);
   }
 
   return (

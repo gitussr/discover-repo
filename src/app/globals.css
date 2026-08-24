@@ -1,18 +1,25 @@
 @import "tailwindcss";
 
+/*
+ * Palette: "Dimidium" terminal color scheme by dofuuz.
+ * https://github.com/dofuuz/dimidium (Zlib license)
+ * Surfaces/borders are derived steps up from the scheme's own background;
+ * text/status/accent colors are taken directly from its 16-color set.
+ */
 :root {
-  --color-bg: #0a0b0c;
-  --color-surface: #121416;
-  --color-surface-raised: #17191c;
-  --color-border: #2a2d31;
-  --color-border-strong: #3a3e44;
-  --color-text: #e6e8eb;
-  --color-text-muted: #8b9096;
-  --color-text-dim: #5c6167;
-  --color-success: #4fd68a;
-  --color-warning: #e6c15c;
-  --color-error: #f0654f;
-  --color-accent: #58d0c9;
+  --color-bg: #141414;
+  --color-surface: #1a1a1a;
+  --color-surface-raised: #202020;
+  --color-border: #2e2e2e;
+  --color-border-strong: #3d3d3d;
+  --color-text: #dee3e4;
+  --color-text-muted: #bab7b6;
+  --color-text-dim: #817e7e;
+  --color-success: #37e57b;
+  --color-warning: #db9c11;
+  --color-error: #cf494c;
+  --color-accent: #32e0fb;
+  --color-selection: #8db8e5;
 }
 
 @theme inline {
@@ -28,7 +35,7 @@
   --color-warning: var(--color-warning);
   --color-error: var(--color-error);
   --color-accent: var(--color-accent);
-  --font-mono: var(--font-mono), "JetBrains Mono", "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+  --font-mono: var(--font-mono), "Ubuntu Sans Mono", "IBM Plex Mono", ui-monospace, "Courier New", monospace;
 }
 
 * {
@@ -50,7 +57,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-selection);
   color: var(--color-bg);
 }
 
@@ -77,6 +84,15 @@ body {
 @keyframes blink {
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
   }
 }
 

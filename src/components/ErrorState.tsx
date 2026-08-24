@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import type { GitHubApiErrorKind } from "@/lib/types";
+import { useRoute } from "@/lib/spa-router";
 
 const COPY: Record<GitHubApiErrorKind, { line: string; body: string }> = {
   "invalid-username": {
@@ -22,7 +22,16 @@ const COPY: Record<GitHubApiErrorKind, { line: string; body: string }> = {
   },
 };
 
-export default function ErrorState({ username, kind }: { username: string; kind: GitHubApiErrorKind }) {
+export default function ErrorState({
+  username,
+  kind,
+  onRetry,
+}: {
+  username: string;
+  kind: GitHubApiErrorKind;
+  onRetry?: () => void;
+}) {
+  const { navigate } = useRoute();
   const copy = COPY[kind];
 
   return (
@@ -35,17 +44,18 @@ export default function ErrorState({ username, kind }: { username: string; kind:
       <div className="mt-5 flex gap-2">
         <button
           type="button"
-          onClick={() => window.location.reload()}
+          onClick={() => (onRetry ? onRetry() : window.location.reload())}
           className="rounded-sm border border-[var(--color-border)] px-3 py-1.5 text-xs hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
         >
           Retry
         </button>
-        <Link
-          href="/"
+        <button
+          type="button"
+          onClick={() => navigate("/")}
           className="rounded-sm border border-[var(--color-border)] px-3 py-1.5 text-xs hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
         >
           Try another username
-        </Link>
+        </button>
       </div>
     </div>
   );

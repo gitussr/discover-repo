@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getReadmeText } from "@/lib/github";
 
 const MAX_LINES = 15;
 const MAX_CHARS = 900;
@@ -27,19 +28,14 @@ export default function ReadmePeek({ owner, repo, repoUrl }: { owner: string; re
   useEffect(() => {
     let cancelled = false;
 
-    fetch(`/api/readme/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`)
-      .then(async (res) => {
+    getReadmeText(owner, repo)
+      .then((text) => {
         if (cancelled) return;
-        if (res.status === 404) {
+        if (text === null) {
           setState({ status: "empty" });
           return;
         }
-        if (!res.ok) {
-          setState({ status: "error" });
-          return;
-        }
-        const data: { text: string } = await res.json();
-        setState({ status: "ready", ...truncate(data.text) });
+        setState({ status: "ready", ...truncate(text) });
       })
       .catch(() => {
         if (!cancelled) setState({ status: "error" });
