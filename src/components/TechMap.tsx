@@ -10,16 +10,12 @@ export default function TechMap({ repos, onClose }: { repos: Repository[]; onClo
   const max = entries[0]?.[1] ?? 1;
 
   return (
-    <section className="rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+    <section className="panel">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold text-[var(--color-text-muted)]">
           <span aria-hidden="true">$ </span>/techmap
         </h2>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-sm border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-        >
+        <button type="button" onClick={onClose} className="btn-ghost">
           close
         </button>
       </div>
@@ -34,10 +30,10 @@ export default function TechMap({ repos, onClose }: { repos: Repository[]; onClo
                 <span>{language}</span>
                 <span className="text-xs text-[var(--color-text-dim)]">{count}</span>
               </div>
-              <div className="mt-1 h-2 w-full rounded-sm bg-[var(--color-border)]" role="img" aria-label={`${language}: ${count} repositories`}>
+              <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-[var(--color-border)]" role="img" aria-label={`${language}: ${count} repositories`}>
                 <div
-                  className="h-full rounded-sm bg-[var(--color-accent)]"
-                  style={{ width: `${Math.max(4, (count / max) * 100)}%` }}
+                  className="h-full rounded-full transition-[width] duration-500 ease-out"
+                  style={{ width: `${Math.max(4, (count / max) * 100)}%`, backgroundImage: "var(--gradient-brand)" }}
                 />
               </div>
             </li>

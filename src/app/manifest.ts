@@ -16,8 +16,14 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#141414",
     theme_color: "#141414",
     icons: [
+      // Vector first: launchers that support it (most current Chrome/Android)
+      // use this for splash/home-screen icons instead of upscaling a raster,
+      // which is what caused the blur on the loading/splash screen.
+      { src: "icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
       { src: "icons/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
       { src: "icons/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "icons/icon-1024.png", sizes: "1024x1024", type: "image/png", purpose: "any" },
+      { src: "icons/icon-512-maskable.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }

@@ -8,7 +8,7 @@ export default function EmptyState({
   suggestions?: string[];
 }) {
   return (
-    <div className="rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm">
+    <div className="panel text-sm">
       <p className="text-[var(--color-text-dim)]">
         <span aria-hidden="true">$ </span>
         {prompt}

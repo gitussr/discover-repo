@@ -24,7 +24,7 @@ export default function FilterChips({
           <button
             type="button"
             onClick={() => onRemove(chip.key)}
-            className="flex items-center gap-1.5 rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-1 text-xs text-[var(--color-text-muted)] hover:border-[var(--color-error)] hover:text-[var(--color-error)]"
+            className="flex items-center gap-1.5 rounded-full border border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_14%,transparent)] px-2.5 py-1 text-xs text-[var(--color-accent)] transition-colors hover:border-[var(--color-error)] hover:bg-[color-mix(in_srgb,var(--color-error)_14%,transparent)] hover:text-[var(--color-error)]"
           >
             {chip.label}
             <span aria-hidden="true">✕</span>

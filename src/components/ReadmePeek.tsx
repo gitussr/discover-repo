@@ -66,7 +66,7 @@ export default function ReadmePeek({ owner, repo, repoUrl }: { owner: string; re
 
       {state.status === "ready" && (
         <>
-          <pre className="mt-2 max-h-64 overflow-y-auto whitespace-pre-wrap break-words rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] p-2.5 text-xs text-[var(--color-text-muted)]">
+          <pre className="mt-2 max-h-64 overflow-y-auto whitespace-pre-wrap break-words rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-xs text-[var(--color-text-muted)]">
             {state.snippet}
             {state.wasTruncated ? "\n…" : ""}
           </pre>
@@ -74,7 +74,7 @@ export default function ReadmePeek({ owner, repo, repoUrl }: { owner: string; re
             href={`${repoUrl}#readme`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-1.5 inline-block text-xs text-[var(--color-accent)] hover:underline"
+            className="mt-1.5 inline-block text-xs text-[var(--color-accent)] transition-colors hover:underline"
           >
             View full README on GitHub ↗
           </a>

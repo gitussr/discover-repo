@@ -45,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Script id="restore-path" strategy="beforeInteractive">
           {RESTORE_PATH_SCRIPT}
         </Script>
+        <div aria-hidden="true" className="h-[3px] w-full shrink-0" style={{ backgroundImage: "var(--gradient-brand)" }} />
         <RouteProvider>{children}</RouteProvider>
         <PWARegister />
       </body>

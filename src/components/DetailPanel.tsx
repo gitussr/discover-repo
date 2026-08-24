@@ -61,19 +61,13 @@ export default function DetailPanel({
         aria-modal="true"
         aria-labelledby="detail-panel-title"
         onClick={(e) => e.stopPropagation()}
-        className="h-full w-full overflow-y-auto border-l border-[var(--color-border)] bg-[var(--color-bg)] p-4 sm:max-w-md sm:p-6"
+        className="h-full w-full overflow-y-auto border-l border-[var(--color-border)] bg-[var(--color-surface)] p-4 shadow-lg sm:max-w-md sm:p-6"
       >
         <div className="flex items-start justify-between gap-3">
           <h2 id="detail-panel-title" className="min-w-0 break-words text-lg font-semibold">
             {repo.name}
           </h2>
-          <button
-            ref={closeRef}
-            type="button"
-            onClick={onClose}
-            aria-label="Close repository details"
-            className="shrink-0 rounded-sm border border-[var(--color-border)] px-2 py-1 text-sm text-[var(--color-text-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-          >
+          <button ref={closeRef} type="button" onClick={onClose} aria-label="Close repository details" className="btn-ghost shrink-0 text-sm">
             ✕
           </button>
         </div>
@@ -88,7 +82,7 @@ export default function DetailPanel({
               href={user.htmlUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--color-accent)] hover:underline"
+              className="text-[var(--color-accent)] transition-colors hover:underline"
             >
               {repo.owner}
             </a>
@@ -111,13 +105,13 @@ export default function DetailPanel({
           <Row label="stars">{repo.stars}</Row>
           <Row label="forks">{repo.forks}</Row>
           <Row label="github">
-            <a href={repo.url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">
+            <a href={repo.url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] transition-colors hover:underline">
               available ↗
             </a>
           </Row>
           {repo.homepage && (
             <Row label="demo">
-              <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">
+              <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] transition-colors hover:underline">
                 available ↗
               </a>
             </Row>
@@ -139,26 +133,16 @@ export default function DetailPanel({
             href={repo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-sm border border-[var(--color-border)] px-3 py-1.5 text-xs hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+            className="gradient-fill rounded-md px-3 py-1.5 text-xs font-medium shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
             Open GitHub ↗
           </a>
           {repo.homepage && (
-            <a
-              href={repo.homepage}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-sm border border-[var(--color-border)] px-3 py-1.5 text-xs hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-            >
+            <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="btn-ghost">
               Open Demo ↗
             </a>
           )}
-          <a
-            href={user.htmlUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-sm border border-[var(--color-border)] px-3 py-1.5 text-xs hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-          >
+          <a href={user.htmlUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">
             View User Profile ↗
           </a>
         </div>

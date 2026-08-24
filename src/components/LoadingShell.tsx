@@ -16,9 +16,12 @@ export default function LoadingShell({ username }: { username?: string }) {
             <div
               role="progressbar"
               aria-label={`Loading repository index for ${username}`}
-              className="mt-2 h-1.5 w-full overflow-hidden rounded-sm bg-[var(--color-border)]"
+              className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-border)]"
             >
-              <div className="h-full w-1/3 animate-[indeterminate_1.2s_ease-in-out_infinite] rounded-sm bg-[var(--color-accent)]" />
+              <div
+                className="h-full w-1/3 animate-[indeterminate_1.2s_ease-in-out_infinite] rounded-full"
+                style={{ backgroundImage: "var(--gradient-brand)" }}
+              />
             </div>
           </div>
         )}

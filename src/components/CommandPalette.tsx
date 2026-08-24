@@ -75,7 +75,8 @@ export default function CommandPalette({
         aria-modal="true"
         aria-label="Command palette"
         onClick={(e) => e.stopPropagation()}
-        className="flex h-full w-full flex-col overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface-raised)] sm:h-auto sm:max-h-[70vh] sm:max-w-lg sm:rounded-sm"
+        className="gradient-border flex h-full w-full flex-col overflow-hidden shadow-lg sm:h-auto sm:max-h-[70vh] sm:max-w-lg sm:rounded-lg"
+        style={{ "--gradient-border-fill": "var(--color-surface-raised)" } as React.CSSProperties}
       >
         <div className="flex items-center gap-2 border-b border-[var(--color-border)] px-3 py-3">
           <span aria-hidden="true" className="text-[var(--color-text-dim)]">
@@ -93,12 +94,7 @@ export default function CommandPalette({
             aria-label="Search commands"
             className="focus-ring-none min-w-0 flex-1 bg-transparent text-sm text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-dim)]"
           />
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close command palette"
-            className="shrink-0 rounded-sm border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-          >
+          <button type="button" onClick={onClose} aria-label="Close command palette" className="btn-ghost shrink-0">
             Esc
           </button>
         </div>
@@ -111,8 +107,10 @@ export default function CommandPalette({
               key={cmd.name}
               role="option"
               aria-selected={i === index}
-              className={`flex flex-col gap-0.5 px-3 py-2.5 text-sm sm:flex-row sm:items-baseline sm:gap-3 ${
-                i === index ? "bg-[var(--color-border)]" : ""
+              className={`flex flex-col gap-0.5 border-l-2 px-3 py-2.5 text-sm transition-colors sm:flex-row sm:items-baseline sm:gap-3 ${
+                i === index
+                  ? "border-l-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_10%,transparent)]"
+                  : "border-l-transparent"
               }`}
               onMouseEnter={() => setIndex(i)}
               onMouseDown={(e) => {

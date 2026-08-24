@@ -45,15 +45,11 @@ export default function ErrorState({
         <button
           type="button"
           onClick={() => (onRetry ? onRetry() : window.location.reload())}
-          className="rounded-sm border border-[var(--color-border)] px-3 py-1.5 text-xs hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+          className="gradient-fill rounded-md px-3 py-1.5 text-xs font-medium shadow-sm transition-transform hover:scale-[1.02] active:scale-[0.98]"
         >
           Retry
         </button>
-        <button
-          type="button"
-          onClick={() => navigate("/")}
-          className="rounded-sm border border-[var(--color-border)] px-3 py-1.5 text-xs hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-        >
+        <button type="button" onClick={() => navigate("/")} className="btn-ghost">
           Try another username
         </button>
       </div>

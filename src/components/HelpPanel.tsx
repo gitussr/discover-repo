@@ -2,14 +2,10 @@ import { COMMAND_LIST } from "@/lib/commands";
 
 export default function HelpPanel({ onClose }: { onClose: () => void }) {
   return (
-    <div className="rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+    <div className="panel">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold text-[var(--color-text-muted)]">AVAILABLE COMMANDS</h2>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-sm border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-        >
+        <button type="button" onClick={onClose} className="btn-ghost">
           /clear
         </button>
       </div>

@@ -21,16 +21,12 @@ export default function Timeline({
   const years = Array.from(byYear.keys()).sort((a, b) => Number(b) - Number(a));
 
   return (
-    <section className="rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+    <section className="panel">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold text-[var(--color-text-muted)]">
           DEVELOPMENT HISTORY / {username}
         </h2>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-sm border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-        >
+        <button type="button" onClick={onClose} className="btn-ghost">
           close
         </button>
       </div>
@@ -50,7 +46,7 @@ export default function Timeline({
                     <button
                       type="button"
                       onClick={() => onOpen(repo)}
-                      className="text-left text-sm text-[var(--color-text)] hover:text-[var(--color-accent)] hover:underline"
+                      className="text-left text-sm text-[var(--color-text)] transition-colors hover:text-[var(--color-accent)] hover:underline"
                     >
                       {repo.name}
                     </button>

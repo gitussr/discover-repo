@@ -23,18 +23,24 @@ function distToSegment(px, py, ax, ay, bx, by) {
   return Math.hypot(px - cx, py - cy);
 }
 
-function renderIcon(size) {
+// safeScale shrinks the glyph toward center (50,50) in the 0-100 design
+// space before scaling to pixels. 1 = edge-to-edge (favicon / "any" icons).
+// ~0.55 keeps everything within the ~40%-of-radius "safe zone" that
+// maskable-icon-aware launchers (Android adaptive icons, PWA splash
+// screens) may crop to — without it the cursor bar gets clipped.
+function renderIcon(size, safeScale = 1) {
   const s = size / 100;
-  const strokeWidth = 9 * s;
+  const shrink = (v) => 50 + (v - 50) * safeScale;
+  const strokeWidth = 9 * s * safeScale;
   const half = strokeWidth / 2;
-  const p1 = [32 * s, 28 * s];
-  const p2 = [62 * s, 50 * s];
-  const p3 = [32 * s, 72 * s];
-  const barX0 = 60 * s;
-  const barX1 = 82 * s;
-  const barY0 = 66 * s;
-  const barY1 = 74 * s;
-  const barRadius = 2 * s;
+  const p1 = [shrink(32) * s, shrink(28) * s];
+  const p2 = [shrink(62) * s, shrink(50) * s];
+  const p3 = [shrink(32) * s, shrink(72) * s];
+  const barX0 = shrink(60) * s;
+  const barX1 = shrink(82) * s;
+  const barY0 = shrink(66) * s;
+  const barY1 = shrink(74) * s;
+  const barRadius = 2 * s * safeScale;
 
   const pixels = Buffer.alloc(size * size * 4);
 
@@ -80,8 +86,8 @@ function chunk(type, data) {
   return Buffer.concat([lenBuf, typeBuf, data, crcBuf]);
 }
 
-function encodePNG(size) {
-  const pixels = renderIcon(size);
+function encodePNG(size, safeScale = 1) {
+  const pixels = renderIcon(size, safeScale);
 
   const ihdr = Buffer.alloc(13);
   ihdr.writeUInt32BE(size, 0);
@@ -111,9 +117,14 @@ function encodePNG(size) {
 
 mkdirSync(new URL("../public/icons/", import.meta.url), { recursive: true });
 
-for (const size of [512, 192, 180]) {
+for (const size of [1024, 512, 192, 180]) {
   const png = encodePNG(size);
   const path = new URL(`../public/icons/icon-${size}.png`, import.meta.url);
   writeFileSync(path, png);
   console.log(`wrote ${path.pathname} (${png.length} bytes)`);
 }
+
+const maskable = encodePNG(512, 0.55);
+const maskablePath = new URL("../public/icons/icon-512-maskable.png", import.meta.url);
+writeFileSync(maskablePath, maskable);
+console.log(`wrote ${maskablePath.pathname} (${maskable.length} bytes)`);

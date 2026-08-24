@@ -20,7 +20,7 @@ export default function CopyButton({ value, label }: { value: string; label: str
       type="button"
       onClick={handleCopy}
       aria-label={copied ? `Copied ${label}` : `Copy ${label}`}
-      className="shrink-0 rounded-sm border border-[var(--color-border)] px-2 py-1 text-xs text-[var(--color-text-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] focus-visible:border-[var(--color-accent)]"
+      className={`btn-ghost shrink-0 ${copied ? "border-[var(--color-success)] text-[var(--color-success)]" : ""}`}
     >
       {copied ? "✓ copied" : "copy"}
     </button>

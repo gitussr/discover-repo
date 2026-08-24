@@ -4,13 +4,15 @@ import type { GitHubUser } from "@/lib/types";
 export default function UserHeader({ user, onExit }: { user: GitHubUser; onExit: () => void }) {
   return (
     <header className="flex items-start gap-3">
-      <Image
-        src={user.avatarUrl}
-        alt={`${user.login}'s GitHub avatar`}
-        width={40}
-        height={40}
-        className="h-10 w-10 shrink-0 rounded-sm border border-[var(--color-border)]"
-      />
+      <div className="shrink-0 rounded-full p-[2px]" style={{ backgroundImage: "var(--gradient-brand)" }}>
+        <Image
+          src={user.avatarUrl}
+          alt={`${user.login}'s GitHub avatar`}
+          width={40}
+          height={40}
+          className="h-9 w-9 rounded-full border-2 border-[var(--color-bg)]"
+        />
+      </div>
       <div className="min-w-0">
         <p className="text-[var(--color-text-dim)]">
           <span aria-hidden="true">$ </span>repo status --user {user.login}
@@ -26,11 +28,15 @@ export default function UserHeader({ user, onExit }: { user: GitHubUser; onExit:
             href={user.htmlUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--color-accent)] hover:underline"
+            className="text-[var(--color-accent)] transition-colors hover:underline"
           >
             GitHub profile ↗
           </a>
-          <button type="button" onClick={onExit} className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:underline">
+          <button
+            type="button"
+            onClick={onExit}
+            className="text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-accent)] hover:underline"
+          >
             ✕ exit {user.login}
           </button>
         </div>

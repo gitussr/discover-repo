@@ -11,6 +11,10 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "forks", label: "forks" },
 ];
 
+const PILL_BASE = "rounded-full border px-2.5 py-1 transition-colors";
+const PILL_ON = "border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_14%,transparent)] text-[var(--color-accent)]";
+const PILL_OFF = "border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]";
+
 export default function QuickFilters({
   filters,
   onChange,
@@ -25,11 +29,7 @@ export default function QuickFilters({
           type="button"
           onClick={() => onChange({ status: undefined })}
           aria-pressed={!filters.status}
-          className={`rounded-sm border px-2 py-1 ${
-            !filters.status
-              ? "border-[var(--color-accent)] text-[var(--color-accent)]"
-              : "border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-border-strong)]"
-          }`}
+          className={`${PILL_BASE} ${!filters.status ? PILL_ON : PILL_OFF}`}
         >
           all
         </button>
@@ -39,11 +39,7 @@ export default function QuickFilters({
             type="button"
             onClick={() => onChange({ status: filters.status === s ? undefined : s })}
             aria-pressed={filters.status === s}
-            className={`rounded-sm border px-2 py-1 ${
-              filters.status === s
-                ? "border-[var(--color-accent)] text-[var(--color-accent)]"
-                : "border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-border-strong)]"
-            }`}
+            className={`${PILL_BASE} ${filters.status === s ? PILL_ON : PILL_OFF}`}
           >
             {s}
           </button>
@@ -52,11 +48,7 @@ export default function QuickFilters({
           type="button"
           onClick={() => onChange({ pages: !filters.pages })}
           aria-pressed={Boolean(filters.pages)}
-          className={`rounded-sm border px-2 py-1 ${
-            filters.pages
-              ? "border-[var(--color-accent)] text-[var(--color-accent)]"
-              : "border-[var(--color-border)] text-[var(--color-text-muted)] hover:border-[var(--color-border-strong)]"
-          }`}
+          className={`${PILL_BASE} ${filters.pages ? PILL_ON : PILL_OFF}`}
         >
           pages only
         </button>
@@ -67,7 +59,7 @@ export default function QuickFilters({
         <select
           value={filters.sort ?? "updated"}
           onChange={(e) => onChange({ sort: e.target.value as SortOption })}
-          className="rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] px-1.5 py-1 text-[var(--color-text)] outline-none focus-visible:border-[var(--color-accent)]"
+          className="rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-1.5 py-1 text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-accent)]"
         >
           {SORT_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>

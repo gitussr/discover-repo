@@ -6,7 +6,7 @@ export default function TechTags({ tags }: { tags: string[] }) {
       {tags.map((tag) => (
         <li
           key={tag}
-          className="rounded-sm border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-1.5 py-0.5 text-xs text-[var(--color-text-muted)]"
+          className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-2 py-0.5 text-xs text-[var(--color-text-muted)]"
         >
           {tag}
         </li>

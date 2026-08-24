@@ -76,7 +76,7 @@ const CommandBar = forwardRef<HTMLInputElement, CommandBarProps>(function Comman
 
   return (
     <div className="relative">
-      <div className="flex items-center gap-2 rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 focus-within:border-[var(--color-accent)] focus-within:shadow-[0_0_0_2px_var(--color-accent)]">
+      <div className="flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 shadow-sm transition-shadow focus-within:border-[var(--color-accent)] focus-within:shadow-[0_0_0_2px_var(--color-accent)]">
         <span aria-hidden="true" className="text-[var(--color-text-dim)]">
           $
         </span>
@@ -101,7 +101,7 @@ const CommandBar = forwardRef<HTMLInputElement, CommandBarProps>(function Comman
           aria-label={`Search or command repositories for ${username}`}
           className="focus-ring-none min-w-0 flex-1 bg-transparent text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-dim)]"
         />
-        <kbd className="hidden shrink-0 rounded-sm border border-[var(--color-border)] px-1.5 py-0.5 text-[10px] text-[var(--color-text-dim)] sm:inline-block">
+        <kbd className="hidden shrink-0 rounded border border-[var(--color-border)] px-1.5 py-0.5 text-[10px] text-[var(--color-text-dim)] sm:inline-block">
           Ctrl K
         </kbd>
       </div>
@@ -110,15 +110,17 @@ const CommandBar = forwardRef<HTMLInputElement, CommandBarProps>(function Comman
         <ul
           id="command-suggestions"
           role="listbox"
-          className="absolute inset-x-0 top-full z-40 mt-1 max-h-64 overflow-y-auto rounded-sm border border-[var(--color-border)] bg-[var(--color-surface-raised)] shadow-lg"
+          className="absolute inset-x-0 top-full z-40 mt-1.5 max-h-64 overflow-y-auto rounded-md border border-[var(--color-border)] bg-[var(--color-surface-raised)] shadow-lg"
         >
           {suggestions.map((cmd, i) => (
             <li
               key={cmd.name}
               role="option"
               aria-selected={i === suggestIndex}
-              className={`flex flex-col gap-0.5 px-3 py-2 text-sm sm:flex-row sm:items-baseline sm:gap-3 ${
-                i === suggestIndex ? "bg-[var(--color-border)]" : ""
+              className={`flex flex-col gap-0.5 border-l-2 px-3 py-2 text-sm transition-colors sm:flex-row sm:items-baseline sm:gap-3 ${
+                i === suggestIndex
+                  ? "border-l-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_10%,transparent)]"
+                  : "border-l-transparent"
               }`}
               onMouseDown={(e) => {
                 e.preventDefault();

@@ -43,11 +43,11 @@ export default function UsernameForm() {
           spellCheck={false}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? "username-error" : undefined}
-          className="min-w-0 flex-1 rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] outline-none focus-visible:border-[var(--color-accent)]"
+          className="min-w-0 flex-1 rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5 text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-accent)]"
         />
         <button
           type="submit"
-          className="shrink-0 rounded-sm border border-[var(--color-accent)] px-3 py-2 text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
+          className="gradient-fill shrink-0 rounded-md px-4 py-2.5 font-medium shadow-md transition-transform hover:scale-[1.02] active:scale-[0.98]"
         >
           Open repository index
         </button>

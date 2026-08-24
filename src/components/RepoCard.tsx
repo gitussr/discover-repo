@@ -13,8 +13,10 @@ export default function RepoCard({
     <button
       type="button"
       onClick={() => onOpen(repo)}
-      className="w-full rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-left transition-colors hover:border-[var(--color-border-strong)] focus-visible:border-[var(--color-accent)] sm:p-4"
+      className="relative w-full overflow-hidden rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3 pl-4 text-left shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-[var(--color-border-strong)] hover:shadow-md focus-visible:border-[var(--color-accent)] sm:p-4 sm:pl-5"
     >
+      <span aria-hidden="true" className="absolute inset-y-0 left-0 w-[3px]" style={{ backgroundImage: "var(--gradient-brand)" }} />
+
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <span className="min-w-0 truncate text-base font-semibold text-[var(--color-text)]">
           {repo.name}

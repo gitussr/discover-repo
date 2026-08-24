@@ -233,9 +233,14 @@ export default function CommandCenter({
       </div>
 
       {notFoundBanner && (
-        <div className="mt-4 flex items-start justify-between gap-3 rounded-sm border border-[var(--color-error)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-error)]">
+        <div className="mt-4 flex items-start justify-between gap-3 rounded-md border border-[var(--color-error)] bg-[var(--color-surface)] px-3 py-2 text-sm text-[var(--color-error)] shadow-sm">
           <span>✗ Repository not found for this user.</span>
-          <button type="button" onClick={() => setNotFoundBanner(false)} aria-label="Dismiss" className="shrink-0">
+          <button
+            type="button"
+            onClick={() => setNotFoundBanner(false)}
+            aria-label="Dismiss"
+            className="shrink-0 transition-colors hover:text-[var(--color-text)]"
+          >
             ✕
           </button>
         </div>
@@ -264,7 +269,7 @@ export default function CommandCenter({
       </div>
 
       {outputMessage && (
-        <div className="mt-4 whitespace-pre-wrap rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-sm text-[var(--color-text-muted)]">
+        <div className="mt-4 whitespace-pre-wrap rounded-md border border-[var(--color-border)] bg-[var(--color-surface)] p-3 text-sm text-[var(--color-text-muted)] shadow-sm">
           {outputMessage}
         </div>
       )}
