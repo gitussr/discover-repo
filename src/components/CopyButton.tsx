@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 
-export default function CopyButton({ value, label }: { value: string; label: string }) {
+export default function CopyButton({
+  value,
+  label,
+  className = "",
+}: {
+  value: string;
+  label: string;
+  className?: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -20,7 +28,7 @@ export default function CopyButton({ value, label }: { value: string; label: str
       type="button"
       onClick={handleCopy}
       aria-label={copied ? `Copied ${label}` : `Copy ${label}`}
-      className={`btn-ghost shrink-0 ${copied ? "border-[var(--color-success)] text-[var(--color-success)]" : ""}`}
+      className={`btn-ghost shrink-0 ${copied ? "border-[var(--color-success)] text-[var(--color-success)]" : ""} ${className}`}
     >
       {copied ? "✓ copied" : "copy"}
     </button>

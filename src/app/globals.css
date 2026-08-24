@@ -69,6 +69,39 @@ body {
   line-height: 1.55;
 }
 
+/* Replace the OS-default scrollbar (on Windows in particular, a wide
+   grey bar with clickable arrow buttons at each end) with a slim,
+   theme-matched one everywhere in the app — no arrow buttons, no jarring
+   light-grey OS chrome floating in a dark UI. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-dim);
+}
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 ::selection {
   background: var(--color-selection);
   color: var(--color-bg);
